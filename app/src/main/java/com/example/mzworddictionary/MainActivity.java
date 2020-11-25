@@ -15,7 +15,6 @@ import android.widget.EditText;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    static final int GET_STRING = 1; //결과 코드 공유를 위한 전역변수 선언
     EditText edit; //EditText 형태의 edit 선언
     NavigationView navigationView;
     DrawerLayout drawerLayout;
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Button button = (Button) findViewById((R.id.search_button)); //button 은 activity_main 의 search_button 임을 알림
         button.setOnClickListener(new View.OnClickListener() { //button_ok 에 onClickListener 부착
             public void onClick(View v) { //클릭 이벤트 생성
-                Intent intent = new Intent(MainActivity.this, SearchActivity.class); //인텐트 생성
+                Intent intent = new Intent(MainActivity.this, WordListActivity.class); //인텐트 생성
                 intent.putExtra("INPUT_TEXT", edit.getText().toString()); //인텐트에 INPUT_TEXT 라는 이름을 가진 edit 의 글자 데이터 첨부
                 startActivity(intent); //Activity 실행 및 intent 와 결과코드 부착
             }
