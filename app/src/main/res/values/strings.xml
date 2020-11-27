@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MZWordDictionary</string>
+    <string name="app_name">MZ 용어사전</string>
     <string name="title_activity_main2">Main</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -13,4 +13,6 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="detail"><![CDATA[<용어설명>]]></string>
     <string name="origin"><![CDATA[<어원>]]></string>
+    <string name="make_Title"><![CDATA[<용어 만들기>]]></string>
+    <string name="make_name">|용어 이름|</string>
 </resources>

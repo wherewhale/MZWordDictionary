@@ -9,7 +9,7 @@ public class Word {
 
     public Word() { }
 
-    public Word(String word, String detail, String origin, String example, int likes) {
+    public Word(String word, String detail, String origin, String ex, int likes) {
         this.word = word;
         this.detail = detail;
         this.origin = origin;

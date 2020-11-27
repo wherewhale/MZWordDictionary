@@ -48,12 +48,16 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.menu_word:
-                        Intent in = new Intent(MainActivity.this, WordListActivity.class); //intent 생성 및 목적지 선언 (SearchActivity2)
-                        startActivity(in); //인텐트와 결과코드 공유
+                        Intent dic = new Intent(MainActivity.this, WordListActivity.class); //intent 생성 및 목적지 선언 (WordListActivity)
+                        startActivity(dic); //인텐트와 결과코드 공유
                         break;
                     case R.id.menu_report:
-                        Intent intent = new Intent(MainActivity.this, ReportActivity.class); //intent 생성 및 목적지 선언 (SearchActivity2)
-                        startActivity(intent); //인텐트 공유
+                        Intent report = new Intent(MainActivity.this, ReportActivity.class); //intent 생성 및 목적지 선언 (ReportActivity)
+                        startActivity(report); //인텐트 공유
+                        break;
+                    case R.id.menu_make:
+                        Intent make = new Intent(MainActivity.this, WordMakeActivity.class); //intent 생성 및 목적지 선언 (WordMakeActivity)
+                        startActivity(make); //인텐트 공유
                         break;
                     //메뉴 목록 추가가능
                 }

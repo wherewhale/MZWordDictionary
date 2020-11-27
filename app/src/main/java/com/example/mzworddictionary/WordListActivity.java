@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -43,6 +44,7 @@ public class WordListActivity extends AppCompatActivity implements TextWatcher {
         arrayList = new ArrayList<>(); //Word 객체를 담을 ArrayList (어뎁터 쪽으로)
         editsearch =(EditText)findViewById(R.id.et_search);
         editsearch.addTextChangedListener(this);
+        Intent intent = getIntent();
 
         database = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
 
@@ -74,7 +76,7 @@ public class WordListActivity extends AppCompatActivity implements TextWatcher {
 
         adapter = new CustomAdapter(arrayList, this); //Adapter 와 연결
         recyclerView.setAdapter(adapter); //리사이클러 뷰에 어댑터 연결
-
+        editsearch.setText(intent.getStringExtra("INPUT_TEXT")); //text 의 글자에 INPUT_TEXT 라는 이름의 데이터를 삽입한다.
     }
 
 

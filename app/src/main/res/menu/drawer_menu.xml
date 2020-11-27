@@ -7,6 +7,8 @@
                 android:title="용어 전체 보기"/>
             <item android:id="@+id/menu_report"
                 android:title="용어 분석 요청"/>
+            <item android:id="@+id/menu_make"
+                android:title="용어 등록하기"/>
         </menu>
     </item>
 
