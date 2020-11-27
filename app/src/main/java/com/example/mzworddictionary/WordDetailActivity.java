@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
@@ -18,6 +20,9 @@ public class WordDetailActivity extends AppCompatActivity {
     private TextView example;
     private TextView likes;
     private LottieAnimationView imgIconLike;
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+
 
 
     @Override
@@ -32,12 +37,20 @@ public class WordDetailActivity extends AppCompatActivity {
         likes = findViewById(R.id.likes);
         imgIconLike = findViewById(R.id.lottie_animation);
 
+        database = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
+
+        databaseReference = database.getReference("id_list");
+
+
+
         final Intent intent = getIntent();
         title.setText(intent.getStringExtra("WORD")); //title 의 글자에 WORD 라는 이름의 데이터를 삽입한다.
         detail.setText(intent.getStringExtra("DETAIL")); //detail 에 DETAIL 이라는 이름으로 들어온 데이터 삽입.
         origin.setText(intent.getStringExtra("ORIGIN")); //origin 에 ORIGIN 이라는 이름으로 들어온 데이터 삽입.
         example.setText(intent.getStringExtra("EXAMPLE")); //example 에 EXAMPLE 이라는 이름으로 들어온 데이터 삽입.
         likes.setText("" + intent.getIntExtra("LIKES", 0)); //likes 에 LIKES 라는 이름의 숫자 데이터 삽입
+
+
 
 
         imgIconLike.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +60,7 @@ public class WordDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!isAnimated) {
                     int afterLike = intent.getIntExtra("LIKES", 0) + 1;
+                    databaseReference.child(intent.getStringExtra("WORD")).child("likes").setValue(afterLike); //데이터베이스 좋아요 숫자 변경
                     imgIconLike.playAnimation();
                     imgIconLike.setSpeed(3f);
                     isAnimated = true;
@@ -56,6 +70,7 @@ public class WordDetailActivity extends AppCompatActivity {
                     isAnimated=false;
                     imgIconLike.playAnimation();
                     likes.setText("" + intent.getIntExtra("LIKES", 0));
+                    databaseReference.child(intent.getStringExtra("WORD")).child("likes").setValue(intent.getIntExtra("LIKES", 0));
                 }
             }
         });
