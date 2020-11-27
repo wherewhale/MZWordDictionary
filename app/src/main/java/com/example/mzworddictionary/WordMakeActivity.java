@@ -35,11 +35,11 @@ public class WordMakeActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
         databaseReference = database.getReference("id_list");
 
-        btn_send.setOnClickListener(new View.OnClickListener() { //button_ok 에 onClickListener 부착
+        btn_send.setOnClickListener(new View.OnClickListener() { //button_send 에 onClickListener 부착
             public void onClick(View v) { //클릭 이벤트 생성
                 if(edit_word.getText().toString() == null || edit_detail.getText().toString() == null || edit_origin.getText().toString() == null || edit_example.getText().toString() == null){
                     Toast.makeText(getApplicationContext(), "용어 설명 중 빈 부분이 존재합니다!", Toast.LENGTH_LONG).show();
-                }
+                } //용어 설명 중 빈 부분이 있다면 확인하여 서버로 보내지 않도록 예외설정
                 else{
                     writeNewWord(edit_word.getText().toString(), edit_detail.getText().toString(), edit_origin.getText().toString(), edit_example.getText().toString());
                     Toast.makeText(getApplicationContext(), "용어 등록이 완료되었습니다!", Toast.LENGTH_LONG).show();
@@ -51,6 +51,7 @@ public class WordMakeActivity extends AppCompatActivity {
             private void writeNewWord(String word, String detail, String origin, String example) {
                 Word wordObject = new Word(word, detail, origin, example, 0);
                 databaseReference.child(word).setValue(wordObject);
+                //새로운 언어를 만들어 서버에 데이터 저장
             }
         });
 

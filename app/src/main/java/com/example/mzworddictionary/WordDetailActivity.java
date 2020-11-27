@@ -39,7 +39,7 @@ public class WordDetailActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
 
-        databaseReference = database.getReference("id_list");
+        databaseReference = database.getReference("id_list"); //id_list 라는 주소 확인
 
 
 
@@ -54,23 +54,24 @@ public class WordDetailActivity extends AppCompatActivity {
 
 
         imgIconLike.setOnClickListener(new View.OnClickListener() {
-            boolean isAnimated = false;
+            boolean isAnimated = false; //애니메이션 여부를 확인하기 위한 boolean 변수 선언
 
             @Override
             public void onClick(View v) {
                 if (!isAnimated) {
-                    int afterLike = intent.getIntExtra("LIKES", 0) + 1;
+                    int afterLike = intent.getIntExtra("LIKES", 0) + 1; //좋아요를 누른 경우, 값을 1 늘림
                     databaseReference.child(intent.getStringExtra("WORD")).child("likes").setValue(afterLike); //데이터베이스 좋아요 숫자 변경
-                    imgIconLike.playAnimation();
-                    imgIconLike.setSpeed(3f);
-                    isAnimated = true;
-                    likes.setText("" + afterLike);
+                    imgIconLike.playAnimation(); //로티 애니메이션 실행
+                    imgIconLike.setSpeed(3f); //속도 설정
+                    isAnimated = true; //애니메이션 된 것을 알리기 위해 true 로 설정
+                    likes.setText("" + afterLike); //afterLike 정수값을 넣어 사용자에게 알림
                 } else {
-                    imgIconLike.setSpeed(-2F);
-                    isAnimated=false;
-                    imgIconLike.playAnimation();
-                    likes.setText("" + intent.getIntExtra("LIKES", 0));
+                    imgIconLike.setSpeed(-2F); //로티 애니메이션 속도를 마이너스로 설정하여 역실행
+                    isAnimated=false; //false 로 재변경
+                    imgIconLike.playAnimation(); //로티 애니메이션 실행
+                    likes.setText("" + intent.getIntExtra("LIKES", 0)); //값을 다시 기존으로 변경
                     databaseReference.child(intent.getStringExtra("WORD")).child("likes").setValue(intent.getIntExtra("LIKES", 0));
+                    //데이터베이스의 좋아요 숫자를 기존으로 변경
                 }
             }
         });

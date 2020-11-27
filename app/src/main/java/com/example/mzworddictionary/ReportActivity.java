@@ -21,9 +21,13 @@ public class ReportActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.report);
         btn_report = (Button) findViewById(R.id.btn_report);
 
-        btn_report.setOnClickListener(new View.OnClickListener() { //button_ok 에 onClickListener 부착
+        btn_report.setOnClickListener(new View.OnClickListener() { //btn_report 에 onClickListener 부착
             public void onClick(View v) { //클릭 이벤트 생성
                 Toast.makeText(getApplicationContext(), editText.getText().toString()+"의 분석요청이 완료되었습니다.", Toast.LENGTH_LONG).show();
+                //토스트를 통해 요청이 완료되었음을 알림
+
+                //TODO: 서버에 요청사항 보내는 코드 작성 (추후에 업데이트해서 확장해나갈 부분)
+
             }
         });
     }
