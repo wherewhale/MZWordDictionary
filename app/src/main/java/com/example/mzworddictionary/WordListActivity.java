@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.EditText;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,8 +18,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class WordListActivity extends AppCompatActivity {
+public class WordListActivity extends AppCompatActivity implements TextWatcher {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -24,6 +28,8 @@ public class WordListActivity extends AppCompatActivity {
     private ArrayList<Word> arrayList;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
+    EditText editsearch;
+    CustomAdapter customAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,8 @@ public class WordListActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>(); //Word 객체를 담을 ArrayList (어뎁터 쪽으로)
+        editsearch =(EditText)findViewById(R.id.et_search);
+        editsearch.addTextChangedListener(this);
 
         database = FirebaseDatabase.getInstance(); //파이어베이스 데이터베이스 연동
 
@@ -67,6 +75,22 @@ public class WordListActivity extends AppCompatActivity {
 
         adapter = new CustomAdapter(arrayList, this); //Adapter 와 연결
         recyclerView.setAdapter(adapter); //리사이클러 뷰에 어댑터 연결
+
+    }
+
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        ((CustomAdapter) adapter).getFilter().filter(s);
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
 
     }
 }

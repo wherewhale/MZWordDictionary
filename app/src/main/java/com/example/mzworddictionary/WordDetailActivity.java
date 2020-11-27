@@ -26,7 +26,10 @@ public class WordDetailActivity extends AppCompatActivity {
         example = findViewById(R.id.example);
 
         Intent intent = getIntent();
-        title.setText(intent.getStringExtra("DETAIL_TEXT")); //text 의 글자에 DETAIL_TEXT 라는 이름의 데이터를 삽입한다.
+        title.setText(intent.getStringExtra("WORD")); //title 의 글자에 WORD 라는 이름의 데이터를 삽입한다.
+        detail.setText(intent.getStringExtra("DETAIL")); //detail 에 DETAIL 이라는 이름으로 들어온 데이터 삽입.
+        origin.setText(intent.getStringExtra("ORIGIN")); //origin 에 ORIGIN 이라는 이름으로 들어온 데이터 삽입.
+        example.setText(intent.getStringExtra("EXAMPLE")); //example 에 EXAMPLE 이라는 이름으로 들어온 데이터 삽입.
         //TODO: 인텐트로 들어온 값을 text 값으로 설정
 //        switch (intent.getStringExtra("DETAIL_TEXT")) {
 //            case "꾸안꾸": {
